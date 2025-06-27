@@ -2,12 +2,14 @@ import React, { useContext, useEffect } from "react";
 import { DoctorContext } from "../../context/DoctorContext";
 import { assets } from "../../assets/assets_admin/assets.js";
 import { AppContext } from "../../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const DoctorDashboard = () => {
+  const navigate = useNavigate();
+
   const {
     dToken,
     dashData,
-    setDashData,
     getDashData,
     completeAppointment,
     cancelAppointment,
@@ -66,7 +68,9 @@ const DoctorDashboard = () => {
               <div
                 className="flex items-center px-6 py-3 hover:bg-gray-100"
                 key={index}
+                onClick={() => navigate(`/patienthistory/${item.userId}`)}
               >
+                {/* {console.log(dashData)} */}
                 <img
                   className="rounded-full w-10 mr-2"
                   src={item.userData.image}

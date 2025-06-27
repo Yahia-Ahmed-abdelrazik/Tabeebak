@@ -2,6 +2,7 @@ import doctorModel from "../models/doctorModel.js";
 import bycrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import appointmentModel from "../models/appointmentModel.js";
+import userModel from "../models/userModel.js";
 
 const changeAvailability = async (req, res) => {
   try {
@@ -168,6 +169,26 @@ const updateDoctorProfile = async (req, res) => {
   }
 };
 
+//api to get user data for doctor panel
+const patientData = async (req, res) => {
+  try {
+    const { patientId } = req.body;
+    const userData = await userModel.findById(patientId).select("-password");
+    // Check if userData is found
+    if (!userData) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    res.json({
+      success: true,
+      userData,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
 export {
   changeAvailability,
   doctorList,
@@ -178,4 +199,5 @@ export {
   doctorDashboard,
   doctorProfile,
   updateDoctorProfile,
+  patientData,
 };
