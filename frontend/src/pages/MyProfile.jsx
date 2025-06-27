@@ -12,6 +12,11 @@ function MyProfile() {
   const [image, setImage] = useState(false);
 
   const updateUserProfileData = async () => {
+    if (!/^\d{12}$/.test(userData.phone)) {
+      toast.error("Phone number must be exactly 12 digits");
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append("name", userData.name);

@@ -70,6 +70,8 @@ function Appointment() {
         const slotDate = `${day}_${month}_${year}`;
         const slotTime = formatingForTime;
         //????????????????????have ana issue
+        // console.log("docInfo", docInfo);
+        // console.log("slots_booked{slotDate}", docInfo.slots_booked[slotDate]);
         const isSlotAvailable =
           docInfo.slots_booked[slotDate] &&
           docInfo.slots_booked[slotDate].includes(slotTime)
@@ -178,7 +180,7 @@ function Appointment() {
         {/* Booking slots */}
         <div className="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700">
           <p>Booking slots </p>
-          <div className="flex gap-3 items-center w-full overflow-x-scroll mt-4">
+          <div className="flex gap-3 items-center w-full overflow-x-scroll mt-4 pb-4">
             {docSlots.length &&
               docSlots.map((item, idx) => {
                 return (
@@ -197,7 +199,7 @@ function Appointment() {
                 );
               })}
           </div>
-          <div className="flex overflow-x-scroll  items-center gap-3 w-full mt-4">
+          <div className="flex overflow-x-scroll  items-center gap-3 w-full mt-4 pb-4 ">
             {docSlots.length &&
               docSlots[slotIdx].map((item, idx) => {
                 return (

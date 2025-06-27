@@ -19,12 +19,39 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
-::-webkit-scrollbar {
-    @apply hidden
-}
 
 @media(max-width:740px) {
     .active p {
         @apply text-white bg-primary
     }
+}
+
+/* scrollbar */
+/* ::-webkit-scrollbar {
+    @apply hidden
+} */
+
+
+::-webkit-scrollbar {
+    /* horizontal scrollbar height */
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    @apply hidden
 }
