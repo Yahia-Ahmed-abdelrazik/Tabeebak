@@ -109,10 +109,12 @@ const DoctorContextProvider = (props) => {
 
   const getPatientData = async (patientId) => {
     try {
-      const { data } = await axios.post(
+      const { data } = await axios.get(
         backendUrl + "/api/doctor/patient-data",
-        { patientId },
-        { headers: { dToken } }
+        {
+          headers: { dToken },
+          params: { patientId },
+        }
       );
 
       if (data.success) {

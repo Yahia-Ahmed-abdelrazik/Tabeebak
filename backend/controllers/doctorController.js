@@ -3,6 +3,7 @@ import bycrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import appointmentModel from "../models/appointmentModel.js";
 import userModel from "../models/userModel.js";
+import PatientHistory from "../models/patienthistoryModel.js";
 
 const changeAvailability = async (req, res) => {
   try {
@@ -172,7 +173,7 @@ const updateDoctorProfile = async (req, res) => {
 //api to get user data for doctor panel
 const patientData = async (req, res) => {
   try {
-    const { patientId } = req.body;
+    const { patientId } = req.query;
     const userData = await userModel.findById(patientId).select("-password");
     // Check if userData is found
     if (!userData) {
@@ -183,6 +184,29 @@ const patientData = async (req, res) => {
       success: true,
       userData,
     });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+//api to add addPatientHistory
+const addPatientHistory = async (req, res) => {
+  try {
+    const { patientId, title, description, prescription } = req.body;
+    const doctorId = req.body.docId; // comes from authDoctor middleware
+
+    const newHistory = new PatientHistory({
+      patientId,
+      doctorId,
+      title,
+      description,
+      prescription,
+    });
+
+    await newHistory.save();
+
+    res.json({ success: true, message: "History added", newHistory });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -200,4 +224,5 @@ export {
   doctorProfile,
   updateDoctorProfile,
   patientData,
+  addPatientHistory,
 };

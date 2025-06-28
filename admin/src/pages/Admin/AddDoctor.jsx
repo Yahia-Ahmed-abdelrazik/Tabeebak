@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { assets } from "../../assets/assets_admin/assets";
 import { AdminContext } from "../../context/AdminContext";
 import { toast } from "react-toastify";
@@ -44,7 +44,7 @@ const AddDoctor = () => {
 
       //
       formData.forEach((value, key) => {
-        // console.log(key, value);
+        console.log(key, value);
       });
 
       const { data } = await axios.post(

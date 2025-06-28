@@ -21,7 +21,7 @@ const DoctorAppointments = () => {
   }, [dToken]);
 
   return (
-    <div className="w-full max-w-6xl m-5">
+    <div className="w-full max-w-5xl m-5">
       <p className="mb-3 text-lg font-medium">All Appointments</p>
 
       <div className="bg-white border-2 border-gray-100 rounded text-sm max-h-[80vh] min-h-[50vh]   ">
@@ -41,6 +41,7 @@ const DoctorAppointments = () => {
             key={index}
           >
             <p className="max-sm:hidden">{index + 1}</p>
+            {console.log(item)}
             <div className="flex items-center gap-2">
               <img
                 className="w-8 rounded-full"
