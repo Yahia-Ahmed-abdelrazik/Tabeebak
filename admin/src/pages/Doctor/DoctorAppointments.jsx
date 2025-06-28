@@ -41,7 +41,7 @@ const DoctorAppointments = () => {
             key={index}
           >
             <p className="max-sm:hidden">{index + 1}</p>
-            {console.log(item)}
+            {/* {console.log(item)} */}
             <div className="flex items-center gap-2">
               <img
                 className="w-8 rounded-full"

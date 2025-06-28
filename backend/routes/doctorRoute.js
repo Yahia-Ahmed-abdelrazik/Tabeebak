@@ -10,6 +10,7 @@ import {
   updateDoctorProfile,
   patientData,
   addPatientHistory,
+  getPatientHistory,
 } from "../controllers/doctorController.js";
 import authDoctor from "../middlewares/authDoctor.js";
 
@@ -25,5 +26,6 @@ doctorRouter.get("/profile", authDoctor, doctorProfile);
 doctorRouter.post("/update-profile", authDoctor, updateDoctorProfile);
 doctorRouter.get("/patient-data", authDoctor, patientData);
 doctorRouter.post("/add-patient-history", authDoctor, addPatientHistory);
+doctorRouter.get("/patient-history", authDoctor, getPatientHistory);
 
 export default doctorRouter;

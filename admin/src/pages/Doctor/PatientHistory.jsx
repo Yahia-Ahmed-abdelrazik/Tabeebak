@@ -4,20 +4,23 @@ import { DoctorContext } from "../../context/DoctorContext";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { assets } from "../../assets/assets_admin/assets";
 
 const PatientHistory = () => {
   const { patientId } = useParams();
-  const { getPatientData, patientData } = useContext(DoctorContext);
   const { calculateAge } = useContext(AppContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [prescription, setPrescription] = useState("");
   const [isOpenForm, setIsOpenForm] = useState(true);
 
+  const { getPatientData, patientData, getPatientHistory, patientHistory } =
+    useContext(DoctorContext);
+
   useEffect(() => {
     getPatientData(patientId);
-
-    // console.log("patientData:", patientData);
+    getPatientHistory(patientId);
+    console.log("patientData:", patientData);
     // console.log("patientId:", patientId);
   }, [patientId]);
 
@@ -55,6 +58,7 @@ const PatientHistory = () => {
         setTitle("");
         setDescription("");
         setPrescription("");
+        getPatientHistory(patientId);
       }
     } catch (error) {
       toast.error(error.message);
@@ -178,6 +182,52 @@ const PatientHistory = () => {
       )}
 
       {/*  */}
+      <div className="bg-white">
+        <div className="flex items-center gap-2.5 px-4 py-4 mt-10 rounded-t  border-2 border-gray-100">
+          <img src={assets.list_icon} alt="" />
+          <p className="font-semibold">Patient History</p>
+        </div>
+
+        <div className="pt-4 border-2 border-gray-100 border-t-0">
+          {patientHistory.history
+            ?.slice()
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .map((item) => {
+              const createdDate = new Date(item.date);
+              const today = new Date();
+
+              const diffTime = today.getTime() - createdDate.getTime();
+
+              const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+              return (
+                <div
+                  key={item._id}
+                  className="relative p-4 mb-4 border-2 border-gray-100 hover:bg-gray-100 shadow-sm hover:shadow-md  transition flex flex-col md:flex-row justify-between items-start md:items-center"
+                >
+                  <div>
+                    <h2 className="text-lg font-bold text-blue-700 mb-1">
+                      {item.title}
+                    </h2>
+                    <p className="text-gray-700 mb-2">{item.description}</p>
+                    <p className="text-green-600 font-medium mb-2">
+                      💊 {item.prescription}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      📅 {createdDate.toLocaleString()}
+                    </p>
+                  </div>
+
+                  <div className="absolute top-2 right-2">
+                    <span className="inline-block px-3 py-1 bg-red-200  text-xs font-semibold rounded-full shadow-sm">
+                      {diffDays} day{diffDays !== 1 ? "s" : ""} ago
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+      </div>
     </div>
   );
 };

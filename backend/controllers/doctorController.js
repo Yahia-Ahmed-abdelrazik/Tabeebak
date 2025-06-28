@@ -213,6 +213,18 @@ const addPatientHistory = async (req, res) => {
   }
 };
 
+//api to get patient history
+const getPatientHistory = async (req, res) => {
+  try {
+    const { patientId } = req.query;
+    const history = await PatientHistory.find({ patientId });
+    res.json({ success: true, history });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
 export {
   changeAvailability,
   doctorList,
@@ -225,4 +237,5 @@ export {
   updateDoctorProfile,
   patientData,
   addPatientHistory,
+  getPatientHistory,
 };
