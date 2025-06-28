@@ -12,6 +12,7 @@ const PatientHistory = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [prescription, setPrescription] = useState("");
+  const [isOpenForm, setIsOpenForm] = useState(true);
 
   useEffect(() => {
     getPatientData(patientId);
@@ -106,57 +107,76 @@ const PatientHistory = () => {
         <p className="px-6 py-4">Loading patient data...</p>
       )}
       {/*  */}
+      {isOpenForm ? (
+        <form onSubmit={handleSubmit} className=" w-full mt-2 ">
+          <p className="mb-3 text-lg font-medium">Add Patient History</p>
+          <div className="bg-white px-8 py-8  border-2 border-gray-100 rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll">
+            <div className="flex flex-col gap-4 text-gray-600 ">
+              <div className="flex-1 flex flex-col gap-1">
+                <p>Title</p>
+                <input
+                  onChange={(e) => setTitle(e.target.value)}
+                  value={title}
+                  type="text"
+                  placeholder="Enter Title"
+                  className="border rounded px-3 py-2"
+                  required
+                />
+              </div>
 
-      <form onSubmit={handleSubmit} className=" w-full mt-2">
-        <p className="mb-3 text-lg font-medium">Add Patient History</p>
+              <div className="flex-1 flex flex-col gap-1">
+                <p>Description</p>
+                <textarea
+                  onChange={(e) => setDescription(e.target.value)}
+                  value={description}
+                  placeholder="Enter Description"
+                  rows={4}
+                  className="border rounded px-3 py-2 outline-none w-full"
+                  required
+                ></textarea>
+              </div>
 
-        <div className="bg-white px-8 py-8  border-2 border-gray-100 rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll">
-          <div className="flex flex-col gap-4 text-gray-600">
-            <div className="flex-1 flex flex-col gap-1">
-              <p>Title</p>
-              <input
-                onChange={(e) => setTitle(e.target.value)}
-                value={title}
-                type="text"
-                placeholder="Enter Title"
-                className="border rounded px-3 py-2"
-                required
-              />
+              <div className="flex-1 flex flex-col gap-1">
+                <p>Prescription</p>
+                <textarea
+                  onChange={(e) => setPrescription(e.target.value)}
+                  value={prescription}
+                  placeholder="Enter Prescription"
+                  rows={4}
+                  className="border rounded px-3 py-2 outline-none w-full"
+                  required
+                ></textarea>
+              </div>
+              {/*  */}
+              <div className="flex justify-center items-center gap-4">
+                <button
+                  type="submit"
+                  className="flex-1/2  bg-primary hover:bg-blue-800 px-10 py-4 mt-4 text-white rounded-full"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsOpenForm(false)}
+                  className="flex-1/2  bg-red-400 hover:bg-red-800 px-10 py-4 mt-4 text-white rounded-full"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
-
-            <div className="flex-1 flex flex-col gap-1">
-              <p>Description</p>
-              <textarea
-                onChange={(e) => setDescription(e.target.value)}
-                value={description}
-                placeholder="Enter Description"
-                rows={4}
-                className="border rounded px-3 py-2 outline-none w-full"
-                required
-              ></textarea>
-            </div>
-
-            <div className="flex-1 flex flex-col gap-1">
-              <p>Prescription</p>
-              <textarea
-                onChange={(e) => setPrescription(e.target.value)}
-                value={prescription}
-                placeholder="Enter Prescription"
-                rows={4}
-                className="border rounded px-3 py-2 outline-none w-full"
-                required
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              className="self-center bg-primary hover:bg-blue-800 px-10 py-4 mt-4 text-white rounded-full"
-            >
-              Save
-            </button>
           </div>
+        </form>
+      ) : (
+        <div className="flex flex-col gap-4 ">
+          <button
+            onClick={() => setIsOpenForm(true)}
+            className="self-center bg-primary hover:bg-blue-800 px-10 py-4 mt-4 text-white rounded-full"
+          >
+            Add Patient History
+          </button>
         </div>
-      </form>
+      )}
+
       {/*  */}
     </div>
   );
