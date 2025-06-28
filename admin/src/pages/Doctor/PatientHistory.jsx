@@ -195,34 +195,37 @@ const PatientHistory = () => {
             .map((item) => {
               const createdDate = new Date(item.date);
               const today = new Date();
-
               const diffTime = today.getTime() - createdDate.getTime();
-
               const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
               return (
                 <div
                   key={item._id}
-                  className="relative p-4 mb-4 border-2 border-gray-100 hover:bg-gray-100 shadow-sm hover:shadow-md  transition flex flex-col md:flex-row justify-between items-start md:items-center"
+                  className="p-4 mb-4 border-2 border-gray-100 hover:bg-gray-100 rounded-md shadow-sm hover:shadow-md transition"
                 >
-                  <div>
-                    <h2 className="text-lg font-bold text-blue-700 mb-1">
-                      {item.title}
-                    </h2>
-                    <p className="text-gray-700 mb-2">{item.description}</p>
-                    <p className="text-green-600 font-medium mb-2">
-                      💊 {item.prescription}
+                  {/* */}
+                  <div className="flex items-center mb-4">
+                    <p className="font-semibold text-gray-800">
+                      {`DoctorId : ${item.doctorId}`}
                     </p>
-                    <p className="text-sm text-gray-500">
-                      📅 {createdDate.toLocaleString()}
-                    </p>
-                  </div>
 
-                  <div className="absolute top-2 right-2">
-                    <span className="inline-block px-3 py-1 bg-red-200  text-xs font-semibold rounded-full shadow-sm">
+                    {/* */}
+                    <span className="ml-auto inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full shadow-sm">
                       {diffDays} day{diffDays !== 1 ? "s" : ""} ago
                     </span>
                   </div>
+
+                  {/* */}
+                  <h2 className="text-lg font-bold text-blue-700 mb-1">
+                    {item.title}
+                  </h2>
+                  <p className="text-gray-700 mb-2">{item.description}</p>
+                  <p className="text-green-600 font-medium mb-2">
+                    💊 {item.prescription}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    📅 {createdDate.toLocaleString()}
+                  </p>
                 </div>
               );
             })}
