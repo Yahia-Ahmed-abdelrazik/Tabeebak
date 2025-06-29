@@ -1,4 +1,5 @@
 // import { assets } from "../assets/assets_frontend/assets";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -22,18 +23,40 @@ function Footer() {
         <div>
           <p className="text-xl font-medium mb-5">COMPANY</p>
           <ul className="flex flex-col gap-2 text-gray-600">
-            <li>Home</li>
-            <li>About us</li>
-            <li> Contact US</li>
-            <li>Privacy policy</li>
+            <li>
+              {" "}
+              <Link className="hover:text-primary" to="/">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:text-primary" to="/about">
+                About
+              </Link>
+            </li>
+            <li>
+              {" "}
+              <Link className="hover:text-primary" to="/contact">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:text-primary" to="/Privacy-policy">
+                Privacy policy
+              </Link>
+            </li>
           </ul>
         </div>
         {/* right Section */}
         <div>
           <p className="text-xl font-medium mb-5">GET IN TOUCH</p>
           <ul className="flex flex-col gap-2 text-gray-600">
-            <li>+1-222-444-5555</li>
-            <li>AhmedMousa@gmail.com</li>
+            <li className="hover:text-primary cursor-pointer">
+              +1-222-444-5555
+            </li>
+            <li className="hover:text-primary cursor-pointer">
+              yahiaahmedyahia2003@gmail.com
+            </li>
           </ul>
         </div>
       </div>
@@ -41,7 +64,7 @@ function Footer() {
       <div>
         <hr />
         <p className="py-5 text-sm text-center">
-          Copyright 2024 @ Greatstack.dev - All Right Reserved.
+          Copyright 2025 @ Tabeebak - All Right Reserved.
         </p>
       </div>
     </div>

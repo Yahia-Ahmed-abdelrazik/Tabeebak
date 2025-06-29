@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import PatientHistory from "./pages/PatientHistory";
 import { ToastContainer } from "react-toastify";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/my-appointments" element={<MyAppointments />} />
         <Route path="/appointment/:docId" element={<Appointment />} />
         <Route path="/patient-history" element={<PatientHistory />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>
