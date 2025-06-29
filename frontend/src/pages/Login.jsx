@@ -1,4 +1,4 @@
-import { use, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
@@ -12,10 +12,20 @@ function Login() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+
+    if (!email.endsWith("@gmail.com")) {
+      toast.error(
+        "Email must be a valid Gmail address (e.g. yourname@gmail.com)"
+      );
+      navigate("/login");
+      return;
+    }
 
     try {
       if (state == "Sign Up") {
@@ -90,20 +100,27 @@ function Login() {
             value={email}
           />
         </div>
-        <div className="w-full">
+        <div className="w-full relative">
           <p>Password</p>
           <input
             className="border border-zinc-300 rounded w-full p-2 mt-1"
-            type="text"
+            type={showPassword ? "text" : "password"}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-[30px] text-xl text-gray-500"
+          >
+            {showPassword ? "🙈" : "👁️"}
+          </button>
         </div>
         {/* btn */}
         <button
           onClick={() => {
             // setToken(true);
-            navigate("/");
+            // navigate("/");
           }}
           type="submit"
           className="bg-primary text-white w-full py-2 rounded-md text-base"
