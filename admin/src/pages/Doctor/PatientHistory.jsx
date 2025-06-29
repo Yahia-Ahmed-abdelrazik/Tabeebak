@@ -47,10 +47,10 @@ const PatientHistory = () => {
         }
       );
 
-      //
-      formData.forEach((value, key) => {
-        console.log(key, value);
-      });
+      //display form data
+      // formData.forEach((value, key) => {
+      //   console.log(key, value);
+      // });
 
       //
       if (data.success) {
@@ -205,9 +205,21 @@ const PatientHistory = () => {
                 >
                   {/* */}
                   <div className="flex items-center mb-4">
-                    <p className="font-semibold text-gray-800">
-                      {`DoctorId : ${item.doctorId}`}
-                    </p>
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={item.doctorId.image}
+                        alt={item.doctorId.name}
+                        className="w-10 h-10 rounded-full object-cover border border-blue-200 "
+                      />
+                      <div>
+                        <p className="font-semibold text-gray-800">
+                          Dr. {item.doctorId.name}
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          {item.doctorId.email}
+                        </p>
+                      </div>
+                    </div>
 
                     {/* */}
                     <span className="ml-auto inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full shadow-sm">

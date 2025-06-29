@@ -70,6 +70,14 @@ function Navbar() {
                 >
                   my Appointments
                 </p>
+                <p
+                  onClick={() => {
+                    navigate("/patient-history");
+                  }}
+                  className="hover:text-black cursor-pointer"
+                >
+                  My History
+                </p>
                 <p onClick={logout} className="hover:text-black cursor-pointer">
                   logout
                 </p>

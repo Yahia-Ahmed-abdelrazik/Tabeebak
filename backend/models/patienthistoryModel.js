@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 const patientHistorySchema = new mongoose.Schema({
   patientId: {
     type: String,
-    // ref: "users",
+    ref: "user",
     required: true,
   },
   doctorId: {
     type: String,
-    // ref: "doctors",
+    ref: "doctor",
     required: true,
   },
   appointmentId: {

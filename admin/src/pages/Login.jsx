@@ -13,6 +13,8 @@ const Login = () => {
   const { setAToken, backendUrl } = useContext(AdminContext);
   const { setDToken } = useContext(DoctorContext);
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -66,15 +68,22 @@ const Login = () => {
           />
         </div>
 
-        <div className="w-full">
+        <div className="w-full relative">
           <p>Password</p>
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="border border-[#dadada] rounded w-full p-2 mt-1"
-            type="password"
+            type={showPassword ? "text" : "password"}
             required
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-[30px] text-xl text-gray-500"
+          >
+            {showPassword ? "🙈" : "👁️"}
+          </button>
         </div>
 
         <button className="bg-primary text-white w-full py-2 rounded-md text-base">

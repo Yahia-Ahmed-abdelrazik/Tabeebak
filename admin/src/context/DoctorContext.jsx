@@ -142,7 +142,7 @@ const DoctorContextProvider = (props) => {
 
       if (data.success) {
         setPatientHistory(data);
-        console.log(data);
+        // console.log(data);
       } else {
         toast.error(data.message);
       }

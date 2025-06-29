@@ -217,7 +217,10 @@ const addPatientHistory = async (req, res) => {
 const getPatientHistory = async (req, res) => {
   try {
     const { patientId } = req.query;
-    const history = await PatientHistory.find({ patientId });
+    const history = await PatientHistory.find({ patientId }).populate(
+      "doctorId",
+      "name email image"
+    );
     res.json({ success: true, history });
   } catch (error) {
     console.log(error);

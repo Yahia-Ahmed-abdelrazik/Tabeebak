@@ -6,6 +6,7 @@ import { v2 as cloudinary } from "cloudinary";
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
 import razorpay from "razorpay";
+import PatientHistory from "../models/patienthistoryModel.js";
 
 //Api to registe user
 
@@ -316,6 +317,23 @@ const verifyRazorPay = async (req, res) => {
   }
 };
 
+//api to get user history
+const getMyHistory = async (req, res) => {
+  try {
+    const patientId = req.body.userId;
+
+    const history = await PatientHistory.find({ patientId }).populate(
+      "doctorId",
+      "name email image"
+    );
+
+    res.json({ success: true, history });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
 /////
 
 export {
@@ -328,4 +346,5 @@ export {
   cancelAppointment,
   paymentRazorpay,
   verifyRazorPay,
+  getMyHistory,
 };
